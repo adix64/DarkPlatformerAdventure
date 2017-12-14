@@ -3,6 +3,7 @@ using System.Collections;
 
 public class followAsh : MonoBehaviour {
 	public GameObject character;
+
 	// Use this for initialization
 	void Start () {
 	

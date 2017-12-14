@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityStandardAssets.Characters.ThirdPerson;
-public class RopeBitScript : MonoBehaviour {
 
+public class RopeBitScript : MonoBehaviour {
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -15,11 +15,12 @@ public class RopeBitScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HAI IN BASCULANTA!");
+        
 
-        ThirdPersonCharacter hull = other.gameObject.GetComponent<ThirdPersonCharacter>();
-        if (hull != null)
+		ChrControl hull = other.gameObject.GetComponent<ChrControl>();
+		if (hull != null && hull.activeRope == null)
         {
+			Debug.Log("HAI IN BASCULANTA!");
             //Physics.IgnoreCollision(this.GetComponent<Collider>(), other.GetComponent<Collider>());
             hull.AttachToRope(this.gameObject);
         }
