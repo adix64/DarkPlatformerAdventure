@@ -18,7 +18,7 @@ public class ChrControl : MonoBehaviour
 
 	public Rigidbody m_Rigidbody;
 	Animator m_Animator;
-	bool m_IsGrounded;
+	public bool m_IsGrounded;
 	float m_OrigGroundCheckDistance;
 	const float k_Half = 0.5f;
 	float m_TurnAmount;
@@ -180,6 +180,8 @@ public class ChrControl : MonoBehaviour
 
 	void ApplyExtraTurnRotation()
 	{
+		if (m_Animator.GetBool ("PushPullIN"))
+			return;
 		// help the character turn faster (this is in addition to root rotation in the animation)
 		float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
 		transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
@@ -227,30 +229,10 @@ public class ChrControl : MonoBehaviour
 		}
 	}
 
-    public void AttachToRope(GameObject ropeBit)
-    {
-		if (m_timeFromAttachment < 0.08f)
-			return;
-		m_timeFromAttachment = 0.0f;
-
-		activeRope = ropeBit;
-        //HingeJoint oldhj = this.gameObject.GetComponent<HingeJoint>();
-        //if (oldhj != null)
-       //     Component.Destroy(oldhj);
-
-       // HingeJoint hj = this.gameObject.AddComponent<HingeJoint>();
-       // hj.connectedBody = ropeBit.GetComponent<Rigidbody>();
-       	Debug.Log("Attach to Rope!");
-        m_IsGrounded = false;
-    }
-
-	public void DetachFromRope()
+	public void PushPullMode(bool mode)
 	{
-		Debug.Log ("DETACH FROM ROPE!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!");
-		activeRope = null;
-		//HingeJoint oldhj = this.gameObject.GetComponent<HingeJoint>();
-		//if (oldhj != null)
-		//	Component.Destroy(oldhj);
+		m_Animator.SetBool ("PushPullIN", mode);
+		m_Animator.SetBool ("PushPullOUT", !mode);
 	}
 }
 

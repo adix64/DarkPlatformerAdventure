@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-
+using System.Collections;
 [RequireComponent(typeof (ChrControl))]
 public class AshController : MonoBehaviour
 {
@@ -11,9 +11,13 @@ public class AshController : MonoBehaviour
     private Vector3 m_Move;
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
 
-    
+	bool canSwing = true;
+	bool swinging = false;
+	bool raising = false;
+	Rigidbody player;
     private void Start()
     {
+		player = gameObject.GetComponent<Rigidbody> ();
         // get the transform of the main camera
         if (Camera.main != null)
         {
@@ -43,22 +47,51 @@ public class AshController : MonoBehaviour
 	private void LateUpdate()
 	{
 
-		if (m_Character.activeRope) {
 
-			m_Character.m_Rigidbody.position = m_Character.activeRope.transform.position + (new Vector3(-0.1f,0f,0f));
-			Debug.Log ("ONANIMATOR________________MOVE!");
-			//	m_Character.DetachFromRope ();
-			//	Debug.Log ("DETACH FROM ROPE");
+	}
+
+
+	private void HandleRopeMovement(float h)
+	{
+		if(swinging == false){
+			
+			if (raising == true) {
+				Debug.Log ("Spawnalagiw");
+				player.velocity = new Vector3 (player.velocity.x + transform.forward.x * 0.1f, 10, 0);
+			}
+		}
+
+		else{
+			
+
+			m_Character.m_IsGrounded = false;
+			GetComponent<CapsuleCollider>().enabled = false;
+
+			if(Mathf.Abs(h) > 0.1f){
+				Debug.Log ("HAVE TO MOVE");
+				Debug.Log (h);
+				player.velocity =  (new Vector3(Mathf.Sign(h) * 10,player.velocity.y,0));
+			}
+				
+			if(Input.GetButtonDown("Jump")){
+
+				GetComponent<Animator> ().SetTrigger("ReleaseRope");
+				player.velocity = new Vector3 (player.velocity.x + transform.forward.x * 0.1f, 10, 0);
+				swinging = false;
+				raising = true;
+				Destroy(GetComponent<HingeJoint>());
+				StartCoroutine(Wait());
+			}
 		}
 	}
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
+
         // read inputs
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
-
-
+		HandleRopeMovement (h);
         bool crouch = Input.GetKey(KeyCode.C);
 
         // calculate move direction to pass to character
@@ -82,4 +115,34 @@ public class AshController : MonoBehaviour
         m_Character.Move(m_Move, crouch, m_Jump);
         m_Jump = false;
     }
+	void OnCollisionEnter(Collision other)
+	{
+
+		if (other.gameObject.tag == "Rope" && canSwing == true) {
+			GetComponent<CapsuleCollider> ().enabled = false;
+//			player.position = other.gameObject.transform.position;
+			player.transform.position = other.gameObject.transform.position + new Vector3 (0, -1, 0);
+			GetComponent<Animator> ().SetTrigger ("HangOnRope");
+			Debug.Log (other.gameObject.name);
+			canSwing = false;
+			swinging = true;
+			HingeJoint hinge = gameObject.AddComponent<HingeJoint> () as HingeJoint;
+			hinge.connectedBody = other.gameObject.GetComponent<Rigidbody> ();
+			hinge.anchor = new Vector3 (0, 255, 0);
+			hinge.axis = new Vector3 (0, 0, 1);
+			hinge.connectedAnchor = new Vector3 (0, 0, 0);
+		}
+	}
+	public void ResetPosition ()
+	{
+		Debug.Log ("DIED!!!!!");
+		gameObject.transform.position = new Vector3 (4.95f, 22.06f, 0f);
+	}
+	IEnumerator Wait()
+	{
+		yield return new WaitForSeconds (0.15f);
+		canSwing = true;
+		GetComponent<CapsuleCollider>().enabled = true;
+		raising = false;
+	}
 }
