@@ -13,7 +13,7 @@ public class Abyss : MonoBehaviour {
 		AshController ashCtrl = col.gameObject.GetComponent<AshController> ();
 		if (ashCtrl != null)
 		{
-			ashCtrl.ResetPosition ();
+			StartCoroutine(ashCtrl.ResetPosition(1f));
 		}
 	}
 	// Update is called once per frame

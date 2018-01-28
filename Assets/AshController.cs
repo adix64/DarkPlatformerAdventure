@@ -133,11 +133,27 @@ public class AshController : MonoBehaviour
 			hinge.connectedAnchor = new Vector3 (0, 0, 0);
 		}
 	}
-	public void ResetPosition ()
+
+	public IEnumerator ResetPosition (float seconds)
 	{
+		yield return new WaitForSeconds (seconds);
 		Debug.Log ("DIED!!!!!");
-		gameObject.transform.position = new Vector3 (4.95f, 22.06f, 0f);
+		Vector3 respawnPosition = GameObject.Find ("Checkpoints").GetComponent<CheckpointManager> ().GetCheckpointPosition();
+		gameObject.transform.position = respawnPosition;
+		GetComponent<Animator> ().SetTrigger ("Revive");
+		GetComponent<ChrControl>().m_IsGrounded = true;
+		GetComponent<CapsuleCollider> ().height = 228.6f;
+
+	
 	}
+	public void Die()
+	{
+		GetComponent<Animator> ().SetTrigger ("Die");
+		GetComponent<CapsuleCollider>().height = 0.6f;
+		StartCoroutine(ResetPosition(3f));
+//		ResetPosition ();
+	}
+
 	IEnumerator Wait()
 	{
 		yield return new WaitForSeconds (0.15f);

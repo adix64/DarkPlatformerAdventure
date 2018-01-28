@@ -15,7 +15,6 @@ public class moveableObj : MonoBehaviour {
 		ash = GameObject.Find ("ThirdPersonController");		
 		mChrCtrl = ash.GetComponent<ChrControl> ();
 		//ashCtrl = tpc.GetComponent<AshController> ();
-		gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationY |RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionZ;
 		mRigidBody = gameObject.GetComponent<Rigidbody>();
 		ashRigidBody = ash.GetComponent<Rigidbody>();
 	}
@@ -31,20 +30,22 @@ public class moveableObj : MonoBehaviour {
 		if (inContact)
 		{//Vector3.Distance (ash.transform.position, transform.position) < 2.05f) {
 			float h = CrossPlatformInputManager.GetAxis ("Horizontal");
-			if (Input.GetKey (KeyCode.F)) {
+			if (Input.GetKey (KeyCode.F))
+			{
+				mRigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
 				mChrCtrl.PushPullMode (true);
-				//mRigidBody.mass = 0.0f;
-
 				mRigidBody.velocity = 2.0f * ashRigidBody.velocity;
-			} else {
+			} else 
+			{
+				mRigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
 				mChrCtrl.PushPullMode(false);
 			}
 		} else {
 			mChrCtrl.PushPullMode(false);
+			mRigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
 		}
 
 	}
-
 
 	void OnCollisionEnter(Collision collision)
 	{

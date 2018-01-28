@@ -12,7 +12,7 @@ public class followAsh : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float x = character.transform.position.x;
-		float y = character.transform.position.y;
+		float y = Mathf.Max(-5f,character.transform.position.y);
 		float z = this.transform.position.z;
 		this.transform.position = new Vector3 (x, y, z);
 	}
