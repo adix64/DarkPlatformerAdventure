@@ -57,28 +57,40 @@ MonoBehaviour:
     volume: 0.414
     pitch: 1
     loop: 0
+    type: SFX
     source: {fileID: 0}
   - name: Kashmir
     clip: {fileID: 8300000, guid: cbb43840396df3c44b61e46ddf9ad9c4, type: 3}
     volume: 0.414
     pitch: 1
     loop: 1
+    type: Music
     source: {fileID: 0}
   - name: Stairway
     clip: {fileID: 8300000, guid: 58c4065a16845f3418c6e460dec378d7, type: 3}
     volume: 0.414
     pitch: 1
     loop: 1
+    type: Music
     source: {fileID: 0}
   - name: ShepardTone
     clip: {fileID: 8300000, guid: 4d5fc53e42faadd4d9bca08dd9f364a6, type: 3}
     volume: 0.136
     pitch: 1
     loop: 1
+    type: Ambient
     source: {fileID: 0}
   - name: Rain
     clip: {fileID: 8300000, guid: 2afa2428153833141a3c21e3da87443f, type: 3}
     volume: 0.414
     pitch: 1
     loop: 1
+    type: Ambient
+    source: {fileID: 0}
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
+    volume: 0.414
+    pitch: 1
+    loop: 0
+    type: SFX
     source: {fileID: 0}

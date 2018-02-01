@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class followAsh : MonoBehaviour {
-	public GameObject character;
+	GameObject character;
 
 	// Use this for initialization
 	void Start () {
-	
+		character = GameObject.FindWithTag ("Player");
 	}
 	
 	// Update is called once per frame

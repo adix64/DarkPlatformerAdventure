@@ -39,6 +39,8 @@ public class CollectibleGargoyle : MonoBehaviour {
 	IEnumerator Collect()
 	{
 		yield return new WaitForSeconds (3.0f);
+		GameObject.FindWithTag("MainCamera").GetComponent<CollectiblesUI> ().AddCollectible ();
 		Destroy(this.gameObject);
+
 	}
 }

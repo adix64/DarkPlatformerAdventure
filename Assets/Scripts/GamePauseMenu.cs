@@ -31,4 +31,8 @@ public class GamePauseMenu : MonoBehaviour {
 		transform.GetChild (0).gameObject.transform.Find ("MainMenu").gameObject.SetActive (true);
 		transform.GetChild (0).gameObject.transform.Find ("OptionsMenu").gameObject.SetActive (false);
 	}
+	public void Quit()
+	{
+		Application.Quit ();
+	}
 }

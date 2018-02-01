@@ -84,10 +84,12 @@
      <Compile Include="Assets\Scripts\CheckpointManager.cs" />
      <Compile Include="Assets\Scripts\ChrControl.cs" />
      <Compile Include="Assets\Scripts\CollectibleGargoyle.cs" />
+     <Compile Include="Assets\Scripts\CollectiblesUI.cs" />
      <Compile Include="Assets\Scripts\FallingStone.cs" />
      <Compile Include="Assets\Scripts\followAsh.cs" />
      <Compile Include="Assets\Scripts\GamePauseMenu.cs" />
      <Compile Include="Assets\Scripts\ledge.cs" />
+     <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Line.cs" />
      <Compile Include="Assets\Scripts\LoadLevelScript.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
