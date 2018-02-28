@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour {
 	public bool rainy = false;
 	// Use this for initialization
 	void Start () {
+		var audioManager = GameObject.FindObjectOfType<AudioManager> ();
 		GameObject.FindObjectOfType<AudioManager> ().StopAllMusic ();
 		GameObject.FindObjectOfType<AudioManager> ().StopAllAmbient ();
 		if (songName != "")

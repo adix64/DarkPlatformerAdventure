@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingStone : MonoBehaviour {
+public class FallingStone : MonoBehaviour
+{
 	private Vector3 initialPos;
 	private Rigidbody rb;
 	public float lowerLimit = -10;
@@ -20,12 +21,15 @@ public class FallingStone : MonoBehaviour {
 			rb.velocity = new Vector3 (0, 0, 0);
 		}
 	}
+
 	void OnCollisionEnter(Collision col)
 	{
 		if (col.gameObject.tag == "Player" && isDeadly)
-			col.gameObject.GetComponent<AshController> ().Die ();
+        {
+            col.gameObject.GetComponent<AshController>().Die();
+        }
 
-		if (col.gameObject.tag == "RockResetter")
+        if (col.gameObject.tag == "RockResetter")
 		{
 			transform.position = initialPos;
 			rb.velocity = new Vector3 (0, 0, 0);

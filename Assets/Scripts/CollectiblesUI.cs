@@ -11,7 +11,10 @@ public class CollectiblesUI : MonoBehaviour {
 			transform.Find("CGargoyle" + (i + 1).ToString()).gameObject.SetActive(false);
 		
 	}
-	
+
+	/// <summary>
+    /// Something
+    /// </summary>
 	// Update is called once per frame
 	void Update () {
 		

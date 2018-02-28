@@ -100,6 +100,7 @@
      <Compile Include="Assets\Scripts\Sound.cs" />
      <Compile Include="Assets\Scripts\VideoSettings.cs" />
      <Compile Include="Assets\Scripts\YRotatable.cs" />
+     <Compile Include="Assets\SkinnedMeshParticleTracker.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
