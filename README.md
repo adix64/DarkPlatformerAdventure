@@ -1,2 +1,2 @@
 # DarkPlatformerAdventure
-![](https://j.gifs.com/4QorrJ.gif)
+<img src="https://j.gifs.com/4QorrJ.gif" alt="drawing" width="200"/>
